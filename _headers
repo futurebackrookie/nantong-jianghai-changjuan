@@ -1,0 +1,11 @@
+# Cloudflare Pages / Netlify 读取本文件设置响应头；GitHub Pages 会忽略它（无害）。
+# 字体一年且 immutable：构建时 scripts/build-deploy.sh 给 css/fonts.css 与 index.html 里的字体地址加了内容指纹
+#   fonts/NAME.woff2?v=<sha256 前 10 位>，重建字体后地址跟着变，老访客不会拿到过期的分片（查询串不影响这里按路径匹配）。
+# 图片 30 天、不 immutable：文件名不带指纹，过期后按 ETag 重新校验；换图若沿用旧文件名，最长 30 天后才更新。
+# vendor（gsap / ScrollTrigger / lenis）30 天。其余（index.html、css/、js/）走平台默认的重新校验。
+/images/*
+  Cache-Control: public, max-age=2592000
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/vendor/*
+  Cache-Control: public, max-age=2592000

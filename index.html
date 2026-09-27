@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<script>
+  // 首屏书法「南」「通」所在的两个字库分片，先于样式表与其它字体取回（其余按 unicode-range 用到才取）。
+  // 放在 <head> 最前由脚本插入：双击打开（file://）时跨源的字体预载必被拦下、控制台报错，那时就不发。
+  if (location.protocol !== "file:") ["fonts/ma-shan-zheng-400-1.woff2?v=de35f8e0fd", "fonts/ma-shan-zheng-400-5.woff2?v=991067a19e"].forEach(function (href) {
+    var l = document.createElement("link");
+    l.rel = "preload"; l.as = "font"; l.type = "font/woff2"; l.crossOrigin = "anonymous"; l.href = href;
+    document.head.appendChild(l);
+  });
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>南通 · 江海长卷</title>
+<meta name="description" content="长江入海口北翼，一座从海里长出来的城。江海交汇、近代第一城、濠河夜游、蓝印花布、板鹞风筝——来南通。">
+<meta name="theme-color" content="#1f3a60">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231f3a60'/><text x='32' y='46' font-size='36' text-anchor='middle' font-family='serif' fill='%23f2ede2'>通</text></svg>">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/fx.css">
+<noscript><style>#loader { display: none; }</style></noscript>
+</head>
+<body>
+<noscript>
+  <div class="noscript-bar">本页的地图、动画与互动需要开启 JavaScript</div>
+</noscript>
+
+<div id="loader">
+  <span class="loader-char">通</span>
+  <div class="loader-bar"><i></i></div>
+  <p class="loader-tip">靛青入布</p>
+</div>
+
+<div class="cloth"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<header class="topbar">
+  <a class="brand" href="#hero">
+    <span class="brand-seal">通</span>
+    <span class="brand-name">南通 · 江海长卷</span>
+  </a>
+  <div class="topbar-actions">
+    <button id="sound-toggle" aria-pressed="false" type="button">
+      <span class="sound-bars"><i></i><i></i><i></i><i></i></span>
+      <span>江风</span>
+    </button>
+    <button class="nav-toggle" type="button">目录</button>
+  </div>
+</header>
+
+<nav class="scroll-nav" aria-label="目录">
+  <a href="#hero" data-nav><span>序</span></a>
+  <a href="#jianghai" data-nav><span>江海</span></a>
+  <a href="#modern" data-nav><span>近代</span></a>
+  <a href="#century" data-nav><span>百年</span></a>
+  <a href="#haohe" data-nav><span>濠河</span></a>
+  <a href="#langshan" data-nav><span>狼山</span></a>
+  <a href="#bridge" data-nav><span>大桥</span></a>
+  <a href="#dye" data-nav><span>染坊</span></a>
+  <a href="#kite" data-nav><span>风筝</span></a>
+  <a href="#food" data-nav><span>江鲜</span></a>
+  <a href="#dialect" data-nav><span>乡音</span></a>
+  <a href="#quiz" data-nav><span>问答</span></a>
+  <a href="#planner" data-nav><span>行程</span></a>
+  <a href="#ending" data-nav><span>终</span></a>
+</nav>
+
+<main>
+
+  <section id="hero" class="sec-hero is-dark" aria-label="南通 · 江海交汇">
+    <canvas class="hero-water" aria-hidden="true"></canvas>
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-content">
+      <h1 class="hero-title" aria-label="南通" data-audit="hero-title"><span>南</span><span>通</span></h1>
+      <div class="seal seal-lg hero-seal"><span>江海<br>门户</span></div>
+      <p class="hero-sub">江风海韵 · 长江入海口北翼</p>
+      <p class="hero-en">NANTONG · WHERE THE YANGTZE MEETS THE SEA</p>
+    </div>
+    <a class="scroll-hint" href="#jianghai" data-nav><span>顺江入海</span><i></i></a>
+  </section>
+
+  <section id="jianghai" class="sec sec-jianghai">
+    <header class="sec-head">
+      <span class="sec-en">WHERE LAND GREW FROM THE SEA</span>
+      <h2 data-audit="jianghai-title">一座从海里长出来的城</h2>
+      <p class="sec-sub">长江的泥沙一点点堆出沙洲，沙洲连成了陆地。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="modern" class="sec sec-modern">
+    <header class="sec-head">
+      <span class="sec-en">CHINA'S FIRST MODERN CITY</span>
+      <h2 data-audit="modern-title">中国近代第一城</h2>
+      <p class="sec-sub">张謇在南通办实业、兴教育，留下一整座近代城市的样子。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="century" class="sec sec-century">
+    <header class="sec-head">
+      <span class="sec-en">A CENTURY APART</span>
+      <h2 data-audit="century-title">百年南通</h2>
+      <p class="sec-sub">纱厂的钟楼、张謇的故居都还在，四周已经换了一百年。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="haohe" class="sec sec-haohe is-dark">
+    <header class="sec-head">
+      <span class="sec-en">THE HAO RIVER AT NIGHT</span>
+      <h2 data-audit="haohe-title">濠河夜游</h2>
+      <p class="sec-sub">濠河绕着老城一圈，灯亮起来的时候最好看。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="langshan" class="sec sec-langshan">
+    <header class="sec-head">
+      <span class="sec-en">WOLF HILL</span>
+      <h2 data-audit="langshan-title">江海第一山</h2>
+      <p class="sec-sub">长江边的一座小山，登上山顶能看见江面开阔起来。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="bridge" class="sec sec-bridge">
+    <header class="sec-head">
+      <span class="sec-en">SPANNING THE YANGTZE</span>
+      <h2 data-audit="bridge-title">天堑通途</h2>
+      <p class="sec-sub">一座大桥把南通与长江对岸连了起来，江面上多了一道横线。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="dye" class="sec sec-dye">
+    <header class="sec-head">
+      <span class="sec-en">BLUE CALICO</span>
+      <h2 data-audit="dye-title">染一块蓝印花布</h2>
+      <p class="sec-sub">蓝草染出的靛蓝布，晾在竹竿上像一片片小小的天空。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="kite" class="sec sec-kite is-dark">
+    <header class="sec-head">
+      <span class="sec-en">WHISTLING KITES</span>
+      <h2 data-audit="kite-title">放一只板鹞</h2>
+      <p class="sec-sub">南通的板鹞放上天，风一吹，哨口就响成一片。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="food" class="sec sec-food is-dark">
+    <header class="sec-head">
+      <span class="sec-en">TASTE OF RIVER &amp; SEA</span>
+      <h2 data-audit="food-title">江海之鲜</h2>
+      <p class="sec-sub">长江与黄海在这里交汇，江鲜海鲜都上得了桌。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="dialect" class="sec sec-dialect">
+    <header class="sec-head">
+      <span class="sec-en">VOICES OF NANTONG</span>
+      <h2 data-audit="dialect-title">南通话十级</h2>
+      <p class="sec-sub">南通话不止一种口音，隔条河说法都不一样。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="quiz" class="sec sec-quiz">
+    <header class="sec-head">
+      <span class="sec-en">NANTONG FIRSTS</span>
+      <h2 data-audit="quiz-title">南通之最</h2>
+      <p class="sec-sub">关于这座城市，有些事说出来会让人愣一下。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="planner" class="sec sec-planner">
+    <header class="sec-head">
+      <span class="sec-en">PLAN YOUR TRIP</span>
+      <h2 data-audit="planner-title">江海行程</h2>
+      <p class="sec-sub">从老城到江边，选几个点连成一天的路线。</p>
+    </header>
+    <div class="sec-body"></div>
+  </section>
+
+  <section id="ending" class="sec sec-ending is-dark">
+    <canvas class="en-water" aria-hidden="true"></canvas>
+    <div class="en-vignette" aria-hidden="true"></div>
+    <div class="en-inner">
+      <h2 class="en-title" data-audit="ending-title" aria-label="江海相逢 · 南通欢迎你"><span>江</span><span>海</span><span>相</span><span>逢</span></h2>
+      <div class="seal seal-lg en-seal" aria-hidden="true"><span>南通<br>欢迎你</span></div>
+      <p class="en-sub">濠河的灯、狼山的风、黄海的潮——都在等你。</p>
+      <p class="en-actions">
+        <button id="poster-btn" type="button" class="en-poster-btn">生成我的南通海报</button>
+        <span class="en-poster-hint">用你染的那块布、两套题的评级，合成一张 1080×1920 的图</span>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot" data-audit="footer">
+  <div class="foot-inner">
+    <p class="foot-brand"><span class="brand-seal">通</span><span>南通 · 江海长卷</span></p>
+    <p class="foot-lead">一个纯静态的介绍页：地图、动画与互动全部在浏览器里跑，双击 <code>index.html</code> 就能离线打开。</p>
+    <div class="foot-cols">
+      <details class="foot-block">
+        <summary>图片来源与署名<small class="foot-count" data-credits-count></small></summary>
+        <ul class="foot-credits" data-credits></ul>
+      </details>
+      <details class="foot-block">
+        <summary>事实与数据来源</summary>
+        <ul class="foot-sources" data-sources></ul>
+      </details>
+      <details class="foot-block">
+        <summary>数据与技术</summary>
+        <ul class="foot-tech">
+          <li>行政区划边界：阿里云 DataV.GeoAtlas（<a href="https://datav.aliyun.com/portal/school/atlas/area_selector" target="_blank" rel="noopener">datav.aliyun.com</a>），离线简化后作为<b>示意</b>使用。</li>
+          <li>濠河水面与航线轮廓：© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> 贡献者（ODbL）。</li>
+          <li>方言词条：维基百科「南通话」「沙地话」「通泰方言」条目（CC BY-SA 4.0），写法为近音字。</li>
+          <li>老照片：《南通實業教育慈善風景照相冊》，法国国家图书馆藏，公有领域。</li>
+          <li>技术：GSAP + ScrollTrigger、Lenis；水面为原生 WebGL 片元着色器；声音用 Web Audio 实时合成，无音频文件。</li>
+        </ul>
+      </details>
+    </div>
+    <p class="foot-copy">© 2026 南通 · 江海长卷 · 内容以官方发布为准</p>
+    <!-- 统计代码位置：与北京站一致，本页未接入任何统计；如需接入请在此插入 -->
+  </div>
+</footer>
+
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/pattern.js"></script>
+<script src="js/images.js"></script>
+<script src="js/geo.js"></script>
+<script src="js/map-render.js"></script>
+<script src="js/data.js"></script>
+<script src="js/dom.js"></script>
+<script src="js/reveal.js"></script>
+<script src="js/gl-water.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/fx-write.js"></script>
+<script src="js/strokes/hero.js"></script>
+<script src="js/sections/hero.js"></script>
+<script src="js/sections/jianghai.js"></script>
+<script src="js/sections/modern.js"></script>
+<script src="js/sections/century.js"></script>
+<script src="js/sections/haohe.js"></script>
+<script src="js/sections/langshan.js"></script>
+<script src="js/sections/bridge.js"></script>
+<script src="js/sections/dye.js"></script>
+<script src="js/sections/kite.js"></script>
+<script src="js/sections/food.js"></script>
+<script src="js/sections/dialect.js"></script>
+<script src="js/sections/quiz.js"></script>
+<script src="js/sections/planner.js"></script>
+<script src="js/sections/ending.js"></script>
+<script src="js/fx-dye.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
